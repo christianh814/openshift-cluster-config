@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - pricelist.yaml
 - plapp.yaml
+- bgdk.yaml
