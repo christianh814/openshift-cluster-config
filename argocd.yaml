@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  server:
+    route: true
+  dex:
+    openShiftOAuth: true
+    image: quay.io/redhat-cop/dex
+    version: v2.22.0-openshift
+  rbac:
+    defaultPolicy: 'role:readonly'
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, argocd-admins, role:admin
+    scopes: '[groups]'
+  initialRepositories: |
+    - type: git
+      url: https://github.com/christianh814/openshift-cluster-config

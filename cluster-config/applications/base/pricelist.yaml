@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-config
+spec:
+  destination:
+    namespace: pricelist-operator
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: cluster-config/manifests/pricelist/base
+    repoURL: https://github.com/christianh814/openshift-cluster-config
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  sync:
+    comparedTo:
+      destination:
+        namespace: pricelist-operator
+        server: https://kubernetes.default.svc
+      source:
+        path: cluster-config/manifests/pricelist/base
+        repoURL: https://github.com/christianh814/openshift-cluster-config
+        targetRevision: master
