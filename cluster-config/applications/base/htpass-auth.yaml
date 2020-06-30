@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-bgdk-app
+  name: config-authentication
 spec:
   destination:
-    namespace: bgd
+    namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: cluster-config
   source:
-    path: bgdk/overlays/cluster1
-    repoURL: https://github.com/christianh814/gitops-examples
+    path: manifests/auth-htpass/base
+    repoURL: https://github.com/christianh814/openshift-cluster-config
     targetRevision: master
   syncPolicy:
     automated:
@@ -18,9 +18,9 @@ spec:
   sync:
     comparedTo:
       destination:
-        namespace: bgd
+        namespace: argocd
         server: https://kubernetes.default.svc
       source:
-        path: bgdk/overlays/cluster1
-        repoURL: https://github.com/christianh814/gitops-examples
+        path: manifests/auth-htpass/base
+        repoURL: https://github.com/christianh814/openshift-cluster-config
         targetRevision: master

@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-pricelist-app
+  name: pricelist-frontend-app
 spec:
   destination:
-    namespace: pl
+    namespace: pricelist
     server: https://kubernetes.default.svc
-  project: default
+  project: pricelist
   source:
-    path: cluster-config/manifests/pl/base
-    repoURL: https://github.com/christianh814/openshift-cluster-config
+    path: pricelist/frontend
+    repoURL: https://github.com/christianh814/gitops-examples
     targetRevision: master
   syncPolicy:
     automated:
@@ -18,9 +18,9 @@ spec:
   sync:
     comparedTo:
       destination:
-        namespace: pl
+        namespace: pricelist
         server: https://kubernetes.default.svc
       source:
-        path: cluster-config/manifests/pl/base
-        repoURL: https://github.com/christianh814/openshift-cluster-config
+        path: pricelist/frontend
+        repoURL: https://github.com/christianh814/gitops-examples
         targetRevision: master

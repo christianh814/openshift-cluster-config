@@ -1,26 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-config
+  name: config-container-security
 spec:
   destination:
-    namespace: pricelist-operator
+    namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: cluster-config
   source:
-    path: cluster-config/manifests/pricelist/base
+    path: manifests/container-security-operator/base
     repoURL: https://github.com/christianh814/openshift-cluster-config
     targetRevision: master
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: false
+      selfHeal: false
   sync:
     comparedTo:
       destination:
-        namespace: pricelist-operator
+        namespace: argocd
         server: https://kubernetes.default.svc
       source:
-        path: cluster-config/manifests/pricelist/base
+        path: manifests/container-security-operator/base
         repoURL: https://github.com/christianh814/openshift-cluster-config
         targetRevision: master

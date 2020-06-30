@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: pricelist
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+  roles:
+  - description: Users with admin to applications in project
+    name: users
+    policies:
+    - p, role:user, applications, get, *, allow
+    - p, role:user, applications, sync, *, allow
+    - p, role:user, projects, get, *, allow
+  sourceRepos:
+  - '*'

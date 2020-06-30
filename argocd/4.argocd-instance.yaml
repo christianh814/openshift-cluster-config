@@ -14,8 +14,12 @@ spec:
     defaultPolicy: 'role:readonly'
     policy: |
       g, system:cluster-admins, role:admin
-      g, argocd-admins, role:admin
+      g, admins, role:admin
     scopes: '[groups]'
   initialRepositories: |
-    - type: git
+    - name: cluster-config
+      type: git
       url: https://github.com/christianh814/openshift-cluster-config
+    - name: examples
+      type: git
+      url: https://github.com/christianh814/gitops-examples
