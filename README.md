@@ -76,4 +76,4 @@ Application Deployments:
 
 You don't, it's GitOps!
 
-Jokes aside, the idea is to manage your cluster by pull request to the right repo. In a lot of instances, that means many PRs to may repos!
+Jokes aside, the idea is to manage your cluster by pull request to the right repo. In a lot of instances, that means many PRs to many repos!
