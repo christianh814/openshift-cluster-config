@@ -4,6 +4,5 @@ kind: Kustomization
 resources:
 - htpass-auth.yaml
 - container-security-operator.yaml
-- pricelist.yaml
 - pricelist-frontend.yaml
 - pricelist-db.yaml
