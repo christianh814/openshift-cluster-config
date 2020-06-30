@@ -6,50 +6,14 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 
 ## Installing ArgoCD
 
-> :warning: This is based on the argocd operator v0.9 ...[Andrew](https://github.com/pittar) says there's breaking changes coming in v0.10
+> :warning: This is based on the argocd operator v0.9 using an "Automatic" update strategy ...[Andrew](https://github.com/pittar) says there's breaking changes coming in v0.10 - so be warned!
 
-You first need to install ArgoCD using the Operator, first create the namespace
-
-```
-oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/1.argocd-namespace.yaml
-```
-
-Next, make sure you're on that namespace
+To install argocd using the operator, use this repo.
 
 ```
-oc project argocd
+oc apply -k https://github.com/christianh814/openshift-cluster-config/argocd/install
 ```
 
-Next, create the Operator Group
-
-```
-oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/2.argocd-operatorgroup.yaml
-```
-
-Now, create  the subscription
-
-```
-oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/3.argocd-subscription.yaml
-```
-
-The subscription is set to a "manual" approval of updates. For whatever reason, OLM thinks that install is the same as an update? Anyway; manyally approve the "update" (or what's actually happening; an install)
-
-```
-oc patch -n argocd installplan  $(oc get installplan -n argocd -o jsonpath='{.items[0].metadata.name}') --type=json \
--p='[{"op":"replace","path": "/spec/approved", "value": true}]'
-```
-
-Now you can create your ArgoCD instance
-
-```
-oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/4.argocd-instance.yaml
-```
-
-Make sure you give the service account the right cluster role
-
-```
-oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/5.argocd-cluster-role.yaml
-```
 
 ## Deploying this Repo
 
