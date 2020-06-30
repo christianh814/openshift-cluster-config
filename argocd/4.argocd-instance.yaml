@@ -10,11 +10,17 @@ spec:
     openShiftOAuth: true
     image: quay.io/redhat-cop/dex
     version: v2.22.0-openshift
+  resourceCustomizations: |
+    route.openshift.io/Route:
+      ignoreDifferences: |
+        jsonPointers:
+        - /spec/host
   rbac:
     defaultPolicy: 'role:readonly'
     policy: |
       g, system:cluster-admins, role:admin
       g, admins, role:admin
+      g, developer, role:user
     scopes: '[groups]'
   initialRepositories: |
     - name: cluster-config
