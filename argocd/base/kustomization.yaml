@@ -1,0 +1,4 @@
+resources:
+- argocd-namespace.yaml
+- argocd-operatorgroup.yaml
+- argocd-subscription.yaml
