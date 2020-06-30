@@ -6,3 +6,4 @@ resources:
 - container-security-operator.yaml
 - pricelist-frontend.yaml
 - pricelist-db.yaml
+- pricelist-namespace.yaml
