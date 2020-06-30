@@ -6,36 +6,71 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 
 ## Installing ArgoCD
 
-# Create namespace
+> :warning: This is based on the argocd operator v0.9 ...[Andrew](https://github.com/pittar) says there's breaking changes coming in v0.10
 
-oc create -f 1.argocd-namespace.yaml
+You first need to install ArgoCD using the Operator, first create the namespace
 
-# Switch to namespace
+```
+oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/1.argocd-namespace.yaml
+```
 
+Next, make sure you're on that namespace
+
+```
 oc project argocd
+```
 
-# Create Operator Group
+Next, create the Operator Group
 
-oc create -f 2.argocd-operatorgroup.yaml
+```
+oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/2.argocd-operatorgroup.yaml
+```
 
-# Create Subscription
+Now, create  the subscription
 
-oc create -f 3.argocd-subscription.yaml
+```
+oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/3.argocd-subscription.yaml
+```
 
-# Approve the subscription
+The subscription is set to a "manual" approval of updates. For whatever reason, OLM thinks that install is the same as an update? Anyway; manyally approve the "update" (or what's actually happening; an install)
 
+```
 oc patch -n argocd installplan  $(oc get installplan -n argocd -o jsonpath='{.items[0].metadata.name}') --type=json \
 -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
+```
 
 # Create ArgoCD instance
 
-oc create -f ../argocd.yaml
+```
+oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/4.argocd-instance.yaml
+```
+
+## Deploying this Repo
+
+To configure your cluster to this repo run
+
+```
+oc apply -k https://github.com/christianh814/openshift-cluster-config/cluster-config/config/overlays/default
+```
+
+This will configure your server with the following.
+
+Cluster Configurations:
+* HTPassword Authentication
+* Install Container Security Operator
+
+Application Deployments:
+* Deploy Pricelist in a project called `pricelist`
+  * One `application` running the frontend
+  * Another `application` running the database
+  * The manifests for this app lives in my [gitops example repo](https://github.com/christianh814/gitops-examples)
 
 
-1. Install ArgoCD operator
-2. `oc apply -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd.yaml` in this repo
-3. Assumes you have a `storageClass` named `gp2-storage` with a binding mode of `Immediate`
-4. Run `oc apply -k https://github.com/christianh814/openshift-cluster-config/cluster-config/config/overlays/default`
+# How do I make changes
+
+You don't, it's GitOps!
+
+Jokes aside, the idea is to manage your cluster by pull request to the right repo. In a lot of instances, that means many PRs to may repos!
 
 
 
