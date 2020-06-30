@@ -15,8 +15,8 @@ spec:
   - description: Users with admin to applications in project
     name: users
     policies:
-    - p, role:user, applications, get, *, allow
-    - p, role:user, applications, sync, *, allow
-    - p, role:user, projects, get, *, allow
+    - p, role:user, applications, get, pricelist/*, allow
+    - p, role:user, applications, sync, pricelist/*, allow
+    - p, role:user, projects, get, pricelist, allow
   sourceRepos:
   - '*'
