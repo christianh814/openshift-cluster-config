@@ -39,7 +39,7 @@ oc patch -n argocd installplan  $(oc get installplan -n argocd -o jsonpath='{.it
 -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
 ```
 
-# Create ArgoCD instance
+Now you can create your ArgoCD instance
 
 ```
 oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/4.argocd-instance.yaml
