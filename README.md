@@ -45,6 +45,12 @@ Now you can create your ArgoCD instance
 oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/4.argocd-instance.yaml
 ```
 
+Make sure you give the service account the right cluster role
+
+```
+oc create -f https://raw.githubusercontent.com/christianh814/openshift-cluster-config/master/argocd/5.argocd-cluster-role.yaml
+```
+
 ## Deploying this Repo
 
 To configure your cluster to this repo run
@@ -71,24 +77,3 @@ Application Deployments:
 You don't, it's GitOps!
 
 Jokes aside, the idea is to manage your cluster by pull request to the right repo. In a lot of instances, that means many PRs to may repos!
-
-
-
-
-
-
-
-
-
-
-
-VVVVVVV Delete? VVVVVVVVV
-__Gotchas__
-
-Not sure why, but had to run the following as step `3b`
-
-```
-oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:argocd:argocd-application-controller
-```
-
-^ need to investigate more
