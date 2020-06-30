@@ -14,6 +14,16 @@ To install argocd using the operator, use this repo.
 oc apply -k https://github.com/christianh814/openshift-cluster-config/argocd/install
 ```
 
+__NOTE__
+
+You may get the following error...
+
+```
+error: unable to recognize "https://github.com/christianh814/openshift-cluster-config/argocd/install": no matches for kind "ArgoCD" in version "argoproj.io/v1alpha1"
+```
+
+That's okay, just run the `oc apply -k` command again.
+
 
 ## Deploying this Repo
 
