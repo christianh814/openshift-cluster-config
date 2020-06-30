@@ -16,7 +16,7 @@ spec:
         jsonPointers:
         - /spec/host
   rbac:
-    defaultPolicy: 'role:readonly'
+    defaultPolicy: ''
     policy: |
       g, system:cluster-admins, role:admin
       g, admins, role:admin
