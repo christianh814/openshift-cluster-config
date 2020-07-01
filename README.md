@@ -64,7 +64,7 @@ ArgoCD Configurations
 * The `cluster-config` ArgoCD project has all "cluster wide" configurations
   * Can only be seen/synced by ArgoCD admins
 * The `pricelist` ArgoCD project has all appliaction components to run the [Pricelist](https://github.com/christianh814/openshift-cluster-config) application
-  * Can be seen/synced by by ArgoCD admins or ArgoCD users
+  * Can be seen/synced by ArgoCD admins or ArgoCD users
 * Autosync is turned on
 
 # How do I make changes
