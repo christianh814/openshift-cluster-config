@@ -4,7 +4,3 @@ kind: Kustomization
 resources:
 - htpass-secret.yaml
 - htpasswd.yaml
-- cluster-role-binding.yaml
-- developer-group.yaml
-- admin-group.yaml
-- project-role-binding.yaml

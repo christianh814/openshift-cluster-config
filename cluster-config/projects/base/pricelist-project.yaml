@@ -12,11 +12,11 @@ spec:
   sourceRepos:
   - '*'
   roles:
-  - description: Users with admin to applications in project
-    name: users
+  - description: Developers get view and sync
+    name: developer
     policies:
-    - p, role:user, applications, get, pricelist/*, allow
-    - p, role:user, applications, sync, pricelist/*, allow
-    - p, role:user, projects, get, pricelist, allow
+    - p, role:developer, applications, get, pricelist/*, allow
+    - p, role:developer, applications, sync, pricelist/*, allow
+    - p, role:developer, projects, get, pricelist, allow
   sourceRepos:
   - '*'
