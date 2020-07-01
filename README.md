@@ -37,12 +37,14 @@ This will configure your server with the following.
 
 Cluster Configurations:
 * HTPassword Authentication
-  * Two users: `ocp-admin` and `ocp-developer`
-* Two Groups created
+  * Three users: `ocp-admin`,`ocp-developer`, and `ocp-marketing`
+* Three Groups created
   * `admins`
     * `ocp-admin` is part of `admins`
   * `developer`
     * `ocp-developer` is part of `developer`
+  * `marketing`
+    * `ocp-marketing` is part of `marketing`
 * ClusterRole/Role Bindings setup
   * `admins` group has `cluster-admin` on OpenShift
   * The `developer` group has `edit` on the `pricelist` namespace on OpenShift
