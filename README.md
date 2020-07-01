@@ -43,6 +43,7 @@ Application Deployments:
 * Deploy Pricelist in a project called `pricelist`
   * One `application` running the frontend
   * Another `application` running the database
+  * The 3rd `application` just creates the namespace
   * The manifests for this app lives in my [gitops example repo](https://github.com/christianh814/gitops-examples)
 
 
