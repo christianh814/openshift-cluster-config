@@ -21,6 +21,7 @@ spec:
       g, system:cluster-admins, role:admin
       g, admins, role:admin
       g, developer, role:developer
+      g, marketing, role:marketing
     scopes: '[groups]'
   initialRepositories: |
     - name: cluster-config
