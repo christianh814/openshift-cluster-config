@@ -4,6 +4,7 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
+  version: v1.6.1
   server:
     route: true
   dex:
