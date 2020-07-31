@@ -11,19 +11,20 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 To install argocd using the operator, use this repo.
 
 ```
-oc apply -k https://github.com/christianh814/openshift-cluster-config/argocd/install
+until oc apply -k https://github.com/christianh814/openshift-cluster-config/argocd/install; do sleep 2; done
 ```
 
-__NOTE__
-
-You may get the following error...
+This will start the installation of argocd. You can monitor the install with a `watch` on the following command.
 
 ```
-no matches for kind "ArgoCD" in version "argoproj.io/v1alpha1"
+oc get pods -n argocd
 ```
 
-That's okay, just run the `oc apply -k` command again.
+To get your argocd route (where you can login)
 
+```
+oc get route argocd-server -n argocd -o jsonpath='{.spec.host}{"\n"}'
+```
 
 ## Deploying this Repo
 
