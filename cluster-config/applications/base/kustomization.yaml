@@ -5,6 +5,4 @@ resources:
 - htpass-auth.yaml
 - rbac.yaml
 - container-security-operator.yaml
-- pricelist-frontend.yaml
-- pricelist-db.yaml
-- pricelist-namespace.yaml
+- pricelist-app.yaml

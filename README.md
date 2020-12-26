@@ -53,9 +53,10 @@ Cluster Configurations:
 
 Application Deployments:
 * Deploy Pricelist in an ArgoCD project called `pricelist`
-  * One `application` running the frontend
-  * Another `application` running the database
-  * The 3rd `application` just creates the namespace called `pricelist`
+  * One `application` Consisting of...
+    * Frontend Web Application
+    * Backend Database store
+    * Job that creates database tables and the such
   * The manifests for this app lives in my [gitops example repo](https://github.com/christianh814/gitops-examples)
 
 ArgoCD Configurations

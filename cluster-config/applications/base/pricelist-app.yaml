@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: pricelist-frontend-app
+  name: pricelist-app
 spec:
   destination:
     namespace: pricelist
     server: https://kubernetes.default.svc
   project: pricelist
   source:
-    path: pricelist/frontend
+    path: pricelist/
     repoURL: https://github.com/christianh814/gitops-examples
     targetRevision: master
   syncPolicy:
@@ -21,6 +21,6 @@ spec:
         namespace: pricelist
         server: https://kubernetes.default.svc
       source:
-        path: pricelist/frontend
+        path: pricelist/
         repoURL: https://github.com/christianh814/gitops-examples
         targetRevision: master
