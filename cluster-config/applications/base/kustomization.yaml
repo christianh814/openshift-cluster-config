@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
 - htpass-auth.yaml
 - rbac.yaml
+- pipelines.yaml
 - container-security-operator.yaml
 - pricelist-app.yaml

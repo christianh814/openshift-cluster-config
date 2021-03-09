@@ -50,6 +50,7 @@ Cluster Configurations:
   * `admins` group has `cluster-admin` on OpenShift
   * The `developer` group has `edit` on the `pricelist` namespace on OpenShift
 * Container Security Operator installed
+* Pipelines Operator installed
 
 Application Deployments:
 * Deploy Pricelist in an ArgoCD project called `pricelist`
