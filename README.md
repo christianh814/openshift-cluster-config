@@ -51,6 +51,7 @@ Cluster Configurations:
   * The `developer` group has `edit` on the `pricelist` namespace on OpenShift
 * Container Security Operator installed
 * Pipelines Operator installed
+* Sealed Secrets installed
 
 Application Deployments:
 * Deploy Pricelist in an ArgoCD project called `pricelist`
