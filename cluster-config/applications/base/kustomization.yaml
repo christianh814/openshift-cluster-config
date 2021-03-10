@@ -7,3 +7,4 @@ resources:
 - pipelines.yaml
 - container-security-operator.yaml
 - pricelist-app.yaml
+- sealed-secrets.yaml
