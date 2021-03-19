@@ -2,5 +2,6 @@ bases:
 - ../base
 
 resources:
+- argocd-job.yaml
 - argocd-cluster-role.yaml
 - argocd-instance.yaml
