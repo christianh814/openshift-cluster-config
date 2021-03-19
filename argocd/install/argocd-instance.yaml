@@ -5,6 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-options: Validate=false
     argocd.argoproj.io/sync-wave: "4"
 spec:
   version: v1.8.2
