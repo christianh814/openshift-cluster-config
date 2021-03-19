@@ -4,4 +4,5 @@ metadata:
   annotations:
     openshift.io/description: "ArgoCD project for gitops"
     openshift.io/display-name: "ArgoCD"
+    argocd.argoproj.io/sync-wave: "0"
   name: argocd

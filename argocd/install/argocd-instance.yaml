@@ -3,6 +3,8 @@ kind: ArgoCD
 metadata:
   name: argocd
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   version: v1.8.2
   server:

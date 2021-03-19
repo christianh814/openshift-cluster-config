@@ -2,6 +2,8 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: argocd-application-controller-cluster-admin
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 subjects:
   - kind: ServiceAccount
     name: argocd-application-controller

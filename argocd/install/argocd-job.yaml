@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  name: argocd-crd-wait
+  namespace: argocd
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/openshift4/ose-cli:v4.7
+          command:
+            - /bin/bash
+            - -c
+            - |
+              export HOME=/tmp/argocd
+              mkdir -m 777 -p ${HOME}
+              cd ${HOME}
+              echo ""
+              echo -n "Waiting for the ArgoCD CRD to become available."
+              sleep $SLEEP
+              until oc wait --for=condition=established --timeout=60s crd/applications.argoproj.io
+              do
+                echo -n "...still waiting"
+                sleep $SLEEP
+              done
+              echo "DONE"
+          imagePullPolicy: Always
+          name: argocd-crd-wait
+          env:
+          - name: SLEEP
+            value: "5"
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: argocd-application-controller
+      serviceAccountName: argocd-application-controller
+      terminationGracePeriodSeconds: 30
