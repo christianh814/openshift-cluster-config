@@ -6,7 +6,7 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 
 ## Installing ArgoCD
 
-> :warning: This is based on the argocd operator v0.0.14 using an "Automatic" update strategy on OpenShift 4.6 deploying ArgoCD 1.8.2
+> :warning: This is based on the argocd community operator using an "Automatic" update strategy on OpenShift 4.7 deploying ArgoCD 1.8.2
 
 To install argocd using the operator, use this repo.
 
