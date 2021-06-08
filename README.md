@@ -50,6 +50,30 @@ oc patch argocd openshift-gitops -n openshift-gitops --type=merge \
 -p='{"spec":{"config":{"env":[{"name":"DISABLE_DEX","value":"false"}]},"dex":{"openShiftOAuth":true,"version":"sha256:77bfea96e8d8f3e4197b9f6020c8f5dedbb701245c19afd69a15747ae4bf2804"},"rbac":{"defaultPolicy":"","policy":"g, system:cluster-admins, role:admin\ng, admins, role:admin\ng, developer, role:developer\ng, marketing, role:marketing\n","scopes":"[groups]"},"resourceCustomizations":"bitnami.com/SealedSecret:\n  health.lua: |\n    hs = {}\n    hs.status = \"Healthy\"\n    hs.message = \"Controller doesnt report resource status\"\n    return hs\nroute.openshift.io/Route:\n  ignoreDifferences: |\n    jsonPointers:\n    - /spec/host\n","server":{"insecure":true,"route":{"enabled":true,"tls":{"insecureEdgeTerminationPolicy":"Redirect","termination":"edge"}}}}}'
 ```
 
+Wait for the deployment rollout
+
+```shell
+oc rollout status deploy/openshift-gitops-server -n openshift-gitops
+```
+
+To view the policies set up by the patch
+
+```shell
+oc get argocd openshift-gitops -n openshift-gitops -o yaml | grep -B 1 -A 6 -w 'defaultPolicy: ""'
+```
+
+To get the route
+
+```shell
+oc get routes openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}{"\n"}'
+```
+
+To get the admin password
+
+```shell
+oc  get secret openshift-gitops-cluster -n openshift-gitops -ojsonpath='{.data.admin\.password}' | base64 -d ; echo
+```
+
 ## Deploying this Repo
 
 To configure your cluster to this repo run
