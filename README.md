@@ -6,7 +6,8 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 
 ## Installing ArgoCD
 
-> :warning: This is based on OpenShift 4.7 deploying Argo CD v2.x using OpenShift GitOps v1.1.x. When in doubt consult the [official docs](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html).
+> :warning: This is based on OpenShift 4.7 deploying Argo CD v2.x using OpenShift GitOps v1.1.x.
+> When in doubt consult the [official docs](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html).
 
 First apply the `Subscription` manifest. Since this repo uses DEX, we'll need to enable that.
 
@@ -28,6 +29,12 @@ spec:
     - name: DISABLE_DEX
       value: "false"
 EOF
+```
+
+Wait for the pods to appear
+
+```shell
+echo "Still waiting" ; until [[ $(oc get pods -n openshift-gitops -o name  | wc -l) -ne 0 ]]; do echo -n "."; sleep 3; done; echo ""
 ```
 
 Give the serviceAccount permission to admin the cluster.
