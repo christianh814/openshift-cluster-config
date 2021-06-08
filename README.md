@@ -6,24 +6,41 @@ HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redha
 
 ## Installing ArgoCD
 
-> :warning: This is based on the argocd community operator using an "Automatic" update strategy on OpenShift 4.7 deploying ArgoCD 1.8.2
+> :warning: This is based on OpenShift 4.7 deploying Argo CD v2.x using OpenShift GitOps v1.1.x. When in doubt consult the [official docs](https://docs.openshift.com/container-platform/4.7/cicd/gitops/installing-openshift-gitops.html).
 
-To install argocd using the operator, use this repo.
+First apply the `Subscription` manifest. Since this repo uses DEX, we'll need to enable that.
 
+```shell
+cat <<EOF | oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-gitops-operator
+  namespace: openshift-operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  config:
+    env:
+    - name: DISABLE_DEX
+      value: "false"
+EOF
 ```
-until oc apply -k https://github.com/christianh814/openshift-cluster-config/argocd/install; do sleep 2; done
+
+Give the serviceAccount permission to admin the cluster.
+
+```shell
+oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
 ```
 
-This will start the installation of argocd. You can monitor the install with a `watch` on the following command.
+Patch the manifest in order to use Dex and set up the RBAC policy.
 
-```
-oc get pods -n argocd
-```
-
-To get your argocd route (where you can login)
-
-```
-oc get route argocd-server -n argocd -o jsonpath='{.spec.host}{"\n"}'
+```shell
+oc patch argocd openshift-gitops -n openshift-gitops --type=merge \
+-p='{"spec":{"config":{"env":[{"name":"DISABLE_DEX","value":"false"}]},"dex":{"openShiftOAuth":true,"version":"sha256:77bfea96e8d8f3e4197b9f6020c8f5dedbb701245c19afd69a15747ae4bf2804"},"rbac":{"defaultPolicy":"","policy":"g, system:cluster-admins, role:admin\ng, admins, role:admin\ng, developer, role:developer\ng, marketing, role:marketing\n","scopes":"[groups]"},"resourceCustomizations":"bitnami.com/SealedSecret:\n  health.lua: |\n    hs = {}\n    hs.status = \"Healthy\"\n    hs.message = \"Controller doesnt report resource status\"\n    return hs\nroute.openshift.io/Route:\n  ignoreDifferences: |\n    jsonPointers:\n    - /spec/host\n","server":{"insecure":true,"route":{"enabled":true,"tls":{"insecureEdgeTerminationPolicy":"Redirect","termination":"edge"}}}}}'
 ```
 
 ## Deploying this Repo
