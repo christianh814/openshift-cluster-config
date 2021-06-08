@@ -4,7 +4,7 @@ metadata:
   name: config-rbac
 spec:
   destination:
-    namespace: argocd
+    namespace: openshift-gitops
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
@@ -15,12 +15,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  sync:
-    comparedTo:
-      destination:
-        namespace: argocd
-        server: https://kubernetes.default.svc
-      source:
-        path: manifests/rbac/base
-        repoURL: https://github.com/christianh814/openshift-cluster-config
-        targetRevision: master
