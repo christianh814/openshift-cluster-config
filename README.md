@@ -1,7 +1,6 @@
 # Openshift Cluster Config
-Setting up an OpenShift cluster using Kustomize and ArgoCD. More info coming soon.
 
-HEAVILY borrowed from [the Red Hat Canadia team's repo](https://github.com/redhat-canada-gitops/cluster-config) :canada:
+This repo sets up OpenShift with Day 2 thingys via Argo CD. It also uses Dex (unsupported) for Authentication with OpenShift.
 
 
 ## Installing ArgoCD
