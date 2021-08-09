@@ -18,5 +18,3 @@ spec:
     - p, role:developer, applications, get, pricelist/*, allow
     - p, role:developer, applications, sync, pricelist/*, allow
     - p, role:developer, projects, get, pricelist, allow
-  sourceRepos:
-  - '*'
