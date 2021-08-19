@@ -33,7 +33,7 @@ EOF
 Wait for the pods to appear
 
 ```shell
-echo "Still waiting" ; until [[ $(oc get pods -n openshift-gitops -o name  | wc -l) -ne 0 ]]; do echo -n "."; sleep 3; done; echo ""
+echo -n "Still waiting" ; until [[ $(oc get pods -n openshift-gitops -o name  | wc -l) -ne 0 ]]; do echo -n "."; sleep 3; done; echo ""
 ```
 
 Give the serviceAccount permission to admin the cluster.
