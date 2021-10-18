@@ -1,6 +1,6 @@
 # Openshift Cluster Config
 
-This repo sets up OpenShift with Day 2 thingys via Argo CD. It also uses Dex (unsupported) for Authentication with OpenShift.
+This repo sets up OpenShift with Day 2 thingys via Argo CD. It also uses Dex for Authentication with OpenShift.
 
 
 ## Installing ArgoCD
